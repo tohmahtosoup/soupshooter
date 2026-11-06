@@ -20,21 +20,21 @@ public final class Constants {
     gearbox reduction ratio: (how many times the motor turned in relation to the wheel), also used in drive subsystem
     track width: distance from wheels to center of chassis, used for kinematics */
 
-    public static final double ktrackwidth = 1;
+    /**public static final double ktrackwidth = 1;
     public static final double kdrivegearratio = 1;
-    public static final double kwheeldiameter = 1;
+    public static final double kwheeldiameter = 1;*/
 
     /** !!!! placeholders, remember to change, REMOVE WHEN DONE */
 /** CAN ids: they are used in the drive subsystem when defining the motors (match each sparkmax 
  * to a specific can so data can be sent to it) (which port controls which motor?)*/    
-    public static final int kleftmotorport = 1;
-    public static final int krightmotorport = 2;
-    public static final int kleftmotorport2 = 3;
-    public static final int krightmotorport2 = 4;
+    public static final int kleftmotorport = 3;
+    public static final int krightmotorport = 11;
+    public static final int kleftmotorport2 = 10;
+    public static final int krightmotorport2 = 1;
     
     /** max speed limits? */
-    public final static double kmaxspeed = 1;
-    public final static double kjoystickdeadband = 1;
+    public final static double kmaxspeed = 10;
+    public final static double kjoystickdeadband = 0.1;
   }
   public static class OperatorConstants {
   /** driver controller port: which USB port the xbox controller is connected to */ 

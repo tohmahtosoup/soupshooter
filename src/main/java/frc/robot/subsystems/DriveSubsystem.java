@@ -21,9 +21,12 @@ public class DriveSubsystem extends SubsystemBase {
   /** creates two motors (left,right) that are representations of the physical sparkmaxes that control motors
    * using the CAN id, it assigns each motor with a physical sparkmax controller
    * the motor type is specified
+   * initiation
    */
   private final SparkMax m_leftmotorleader = new SparkMax(driveconstants.kleftmotorport, MotorType.kBrushless);
   private final SparkMax m_rightmotorleader = new SparkMax(driveconstants.krightmotorport, MotorType.kBrushless);
+  private final SparkMax m_leftmotorfollower = new SparkMax(driveconstants.kleftmotorport2, MotorType.kBrushless);
+  private final SparkMax m_rightmotorfollower = new SparkMax(driveconstants.krightmotorport2, MotorType.kBrushless);
   private final DifferentialDrive m_drive = new DifferentialDrive(m_rightmotorleader, m_leftmotorleader);
   /** Creates a new ExampleSubsystem. */
   @SuppressWarnings("removal")
@@ -35,13 +38,15 @@ public class DriveSubsystem extends SubsystemBase {
     m_rightmotorleader.configure(rightsideleader, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     SparkMaxConfig rightsidefollower = new SparkMaxConfig();
-    m_rightmotorleader.configure(rightsidefollower, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    rightsidefollower.follow(m_rightmotorleader); 
+    m_rightmotorfollower.configure(rightsidefollower, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     SparkMaxConfig leftsideleader = new SparkMaxConfig();
     m_leftmotorleader.configure(leftsideleader, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     SparkMaxConfig leftsidefollower = new SparkMaxConfig();
-    m_rightmotorleader.configure(leftsidefollower, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    leftsidefollower.follow(m_leftmotorleader); 
+    m_leftmotorfollower.configure(leftsidefollower, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
   public void arcadeDrive(double forward, double rotation)
     {m_drive.arcadeDrive(forward, rotation);} 
