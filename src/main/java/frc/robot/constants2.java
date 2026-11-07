@@ -11,7 +11,7 @@ public  final class constants2 {
 
         /** the follower wheel has to go the opposite direction to the master */
         public static final boolean opposedirection = true;
-        /** public static final InvertedValue invrtedvalue = InvertedValue.true;*/
+        public static final InvertedValue invertedvalue = InvertedValue.Clockwise_Positive;
 
         public static final double rpmtolerance = 1;
         

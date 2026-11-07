@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.anglersubsystem;
-import frc.robot.subsystems.flywheelsubsystem;
+import frc.robot.subsystems.anglersubsystem;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.PS5Controller;
 
@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.PS5Controller;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_drivesubsystem = new DriveSubsystem();
-  private final flywheelsubsystem m_flywheelsubsystem = new flywheelsubsystem();
+  private final anglersubsystem m_flywheelsubsystem = new anglersubsystem();
   private final anglersubsystem m_anglersubsystem = new anglersubsystem();
 
 
