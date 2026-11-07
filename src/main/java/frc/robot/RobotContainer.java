@@ -63,6 +63,12 @@ public class RobotContainer {
       m_driverController.circle().whileTrue(m_anglersubsystem.position1);
       m_driverController.circle().whileTrue(m_flywheelsubsystem.position1);
 
+      m_driverController.triangle().whileTrue(m_anglersubsystem.position2);
+      m_driverController.triangle().whileTrue(m_flywheelsubsystem.position2);
+      
+      m_driverController.circle().whileTrue(m_anglersubsystem.position1);
+      m_driverController.circle().whileTrue(m_flywheelsubsystem.position1);
+
 
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
