@@ -61,10 +61,9 @@ public class flywheelsubsystem1 {
 
     /** periodic recalculating the target velocity using the bangbang controls*/
     public void periodic(double targetrps) {
-      if (targetrps > 0)
-      public double currentrps = mleadermotor.getVelocity().getValueAsDouble();
-      public double trps = targetrps; 
-      public double calculatedvoltage = bangbangbang.calculate(currentrps,trps);
+      double calculatedvoltage;
+            if (targetrps > 0) 
+              calculatedvoltage = bangbangbang.calculate(mleadermotor.getVelocity().getValueAsDouble(),targetrps);
 
 }
 }

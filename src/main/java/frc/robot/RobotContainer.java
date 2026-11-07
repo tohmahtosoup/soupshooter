@@ -27,13 +27,12 @@ import edu.wpi.first.wpilibj.PS5Controller;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveSubsystem m_drivesubsystem = new DriveSubsystem();
-  private final flywheelsubsystem1 m_flywheelsubsystem = new flywheelsubsystem1();
-  private final anglersubsystem m_anglersubsystem = new anglersubsystem();
-
+  public final DriveSubsystem m_drivesubsystem = new DriveSubsystem();
+  public final flywheelsubsystem1 m_flywheelsubsystem = new flywheelsubsystem1();
+  public final anglersubsystem m_anglersubsystem = new anglersubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final PS5Controller m_driverController = new PS5Controller(OperatorConstants.kDriverControllerPort);
+  public final PS5Controller m_driverController = new PS5Controller(OperatorConstants.kDriverControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -61,6 +60,11 @@ public class RobotContainer {
     new Trigger(m_drivesubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_drivesubsystem));}
 
+      m_driverController.circle().whileTrue(m_anglersubsystem.position1);
+      m_driverController.circle().whileTrue(m_flywheelsubsystem.position1);
+
+
+
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   /**m_driverController.circle().whileTrue(m_drivesubsystem.exampleMethodCommand());  }
@@ -70,15 +74,20 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_drivesubsystem);
-  }
+
 
   public Command position1() {
     return Commands.run(
       () -> {m_flywheelsubsystem.setvelocity(constants2.presetconstants.speed1);
-        m_anglersubsystem.setangle(constants2.presetconstants.angle1);}, m_flywheelsubsystem,m_anglersubsystem);
+        m_anglersubsystem.setangle(constants2.presetconstants.angle1);}, m_flywheelsubsystem,m_anglersubsystem);}
+
+
+
+  public Command position2() {
+    return Commands.run(
+      () -> {m_flywheelsubsystem.setvelocity(constants2.presetconstants.speed2);
+        m_anglersubsystem.setangle(constants2.presetconstants.angle2);}, m_flywheelsubsystem,m_anglersubsystem);
 
   }
-}
+  
+    }
