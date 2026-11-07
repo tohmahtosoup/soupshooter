@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 public  final class constants2 {
     public final static class flywheelconstants {
@@ -10,7 +11,7 @@ public  final class constants2 {
         public static final int kflywheelfollower = 2;
 
         /** the follower wheel has to go the opposite direction to the master */
-        public static final boolean opposedirection = true;
+        public static final MotorAlignmentValue opposedirection = MotorAlignmentValue.Opposed;
         public static final InvertedValue invertedvalue = InvertedValue.Clockwise_Positive;
 
         public static final double rpmtolerance = 1;

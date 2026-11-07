@@ -12,6 +12,7 @@ import com.revrobotics.ResetMode;
 
 import edu.wpi.first.math.controller.BangBangController;
 import frc.robot.constants2;
+import frc.robot.constants2.flywheelconstants;
 
 public class flywheelsubsystem1 {
 
@@ -31,12 +32,40 @@ public class flywheelsubsystem1 {
     public flywheelsubsystem1() {
         /** configure motors, invert the first one so that the velocity motors are rotating in opposite directions */
         TalonFXConfiguration configuration = new TalonFXConfiguration();
-        configuration.MotorOutput.Inverted = constants2.flywheelconstants.
+        configuration.MotorOutput.Inverted = constants2.flywheelconstants.invertedvalue;
+        mleadermotor.getConfigurator().apply(configuration);
+        mfollowermotor.setControl(new Follower(flywheelconstants.kflywheelleader,flywheelconstants.opposedirection));
+        
+        bangbangbang.setTolerance(constants2.flywheelconstants.rpmtolerance);
     }
 
-      public void setting1yo() {}
-    public void setting2yo() {}
+    /** function for stopping the motor, if needed 
+     * can be used to bind to a specific button on controller*/ 
+    public void stopmotor(double targetrps) 
+    {targetrps = 0;
+    mleadermotor.stopMotor();}
+    
+    public void setvelocity(double targetrps) {
+        double mvelocity = targetrps;}
+
+    /** checking if the motor is at the desired speed, within tolerance /
+    public double getRPS() {
+      return mleadermotor.getVelocity().getValueAsDouble();
+    }
+
+    public boolean isatRPS() {
+      if (targetrps == 0) return false;
+      return bangbangbang.atSetpoint();
+    }
+    */
+
+    /** periodic recalculating the target velocity using the bangbang controls*/
+    public void periodic(double targetrps) {
+      if (targetrps > 0)
+      public double currentrps = mleadermotor.getVelocity().getValueAsDouble();
+      public double trps = targetrps; 
+      public double calculatedvoltage = bangbangbang.calculate(currentrps,trps);
 
 }
-
+}
     

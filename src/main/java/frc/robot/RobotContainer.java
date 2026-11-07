@@ -9,10 +9,12 @@ import frc.robot.Constants.driveconstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.anglersubsystem;
+import frc.robot.subsystems.flywheelsubsystem1;
 import frc.robot.subsystems.anglersubsystem;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.PS5Controller;
@@ -26,7 +28,7 @@ import edu.wpi.first.wpilibj.PS5Controller;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_drivesubsystem = new DriveSubsystem();
-  private final anglersubsystem m_flywheelsubsystem = new anglersubsystem();
+  private final flywheelsubsystem1 m_flywheelsubsystem = new flywheelsubsystem1();
   private final anglersubsystem m_anglersubsystem = new anglersubsystem();
 
 
@@ -35,11 +37,12 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    /** 
     m_drivesubsystem.setDefaultCommand(m_drivesubsystem.run( () ->
     m_drivesubsystem.arcadeDrive(
       MathUtil.applyDeadband(-m_driverController.getLeftY(),driveconstants.kjoystickdeadband),
       MathUtil.applyDeadband(-m_driverController.getRightX(), driveconstants.kjoystickdeadband)
-    )));
+    )));*/
     // Configure the trigger bindings
     configureBindings();
   }
@@ -70,5 +73,12 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     return Autos.exampleAuto(m_drivesubsystem);
+  }
+
+  public Command position1() {
+    return Commands.run(
+      () -> {m_flywheelsubsystem.setvelocity(constants2.presetconstants.speed1);
+        m_anglersubsystem.setangle(constants2.presetconstants.angle1);}, m_flywheelsubsystem,m_anglersubsystem);
+
   }
 }
