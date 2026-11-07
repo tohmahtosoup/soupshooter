@@ -11,7 +11,7 @@ import com.revrobotics.ResetMode;
 
 import frc.robot.constants2;
 
-public class shooterSubsystem {
+public class anglerSubsystem {
 
     /** creates two motors (left,right) that are representations of the physical sparkmaxes that control motors
      * using the CAN id, it assigns each motor with a physical sparkmax controller
@@ -26,7 +26,7 @@ public class shooterSubsystem {
 
     private final TalonFX mrotatormotor = new TalonFX(constants2.shooterconstants.krotator);
 
-    public shooterSubsystem() {
+    public anglersubsystem {
         /** configure motors, invert the first one so that the velocity motors are rotating in opposite directions */
         TalonFXConfiguration mleader = new TalonFXConfiguration();
         TalonFXConfiguration mfollower = new TalonFXConfiguration();
