@@ -15,11 +15,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.anglersubsystem;
 import frc.robot.subsystems.flywheelsubsystem1;
-import frc.robot.subsystems.anglersubsystem;
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.PS5Controller;
-
-/**
+/** 
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
@@ -27,12 +25,12 @@ import edu.wpi.first.wpilibj.PS5Controller;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public final DriveSubsystem m_drivesubsystem = new DriveSubsystem();
-  public final flywheelsubsystem1 m_flywheelsubsystem = new flywheelsubsystem1();
-  public final anglersubsystem m_anglersubsystem = new anglersubsystem();
+  private final DriveSubsystem m_drivesubsystem = new DriveSubsystem();
+  private final flywheelsubsystem1 m_flywheelsubsystem = new flywheelsubsystem1();
+  private final anglersubsystem m_anglersubsystem = new anglersubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  public final PS5Controller m_driverController = new PS5Controller(OperatorConstants.kDriverControllerPort);
+  private final CommandPS5Controller m_driverController = new CommandPS5Controller(OperatorConstants.kDriverControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -56,18 +54,15 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_drivesubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_drivesubsystem));}
+    /** binding the pos1, pos2 functions */
+      m_driverController.circle().whileTrue(position1());
+      m_driverController.triangle().whileTrue(position2());
 
-      m_driverController.circle().whileTrue(m_anglersubsystem.position1);
-      m_driverController.circle().whileTrue(m_flywheelsubsystem.position1);
+      /** stop functions binding
+       * for good measure :P, onTrue so that it doesnt have to be conitnuous hold
+       */
+      m_driverController.cross().onTrue(stop());}
 
-      m_driverController.triangle().whileTrue(m_anglersubsystem.position2);
-      m_driverController.triangle().whileTrue(m_flywheelsubsystem.position2);
-      
-      m_driverController.circle().whileTrue(m_anglersubsystem.position1);
-      m_driverController.circle().whileTrue(m_flywheelsubsystem.position1);
 
 
 
@@ -83,17 +78,20 @@ public class RobotContainer {
 
 
   public Command position1() {
-    return Commands.run(
+    return edu.wpi.first.wpilibj2.command.Commands.run(
       () -> {m_flywheelsubsystem.setvelocity(constants2.presetconstants.speed1);
         m_anglersubsystem.setangle(constants2.presetconstants.angle1);}, m_flywheelsubsystem,m_anglersubsystem);}
-
 
 
   public Command position2() {
     return Commands.run(
       () -> {m_flywheelsubsystem.setvelocity(constants2.presetconstants.speed2);
         m_anglersubsystem.setangle(constants2.presetconstants.angle2);}, m_flywheelsubsystem,m_anglersubsystem);
+}
 
-  }
-  
+  public Command stop() {
+    return Commands.runOnce(
+       () -> {m_flywheelsubsytem.mleadermotor.stopMotor();
+      m_anglersubsystem.m_pivoter.stopMotor();}, m_flywheelsubsystem,m_anglersubsystem);}
     }
+  
