@@ -10,11 +10,12 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.anglersubsystem;
 import frc.robot.subsystems.flywheelsubsystem1;
+
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.math.MathUtil;
 /** 
@@ -63,9 +64,6 @@ public class RobotContainer {
        */
       m_driverController.cross().onTrue(stop());}
 
-
-
-
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   /**m_driverController.circle().whileTrue(m_drivesubsystem.exampleMethodCommand());  }
@@ -91,7 +89,9 @@ public class RobotContainer {
 
   public Command stop() {
     return Commands.runOnce(
-       () -> {m_flywheelsubsytem.mleadermotor.stopMotor();
-      m_anglersubsystem.m_pivoter.stopMotor();}, m_flywheelsubsystem,m_anglersubsystem);}
+       () -> {m_flywheelsubsystem.getleader().stopMotor();
+      m_anglersubsystem.getpivot().stopMotor();}, m_flywheelsubsystem,m_anglersubsystem);}
+    
+    
     }
   

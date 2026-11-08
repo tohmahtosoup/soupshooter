@@ -26,7 +26,7 @@ public class flywheelsubsystem1 extends SubsystemBase{
     private final TalonFX mfollowermotor = new TalonFX(constants2.flywheelconstants.kflywheelfollower);
     private final BangBangController bangbangbang = new BangBangController();
     
-    private double targetrps = 0;
+    private double m_targetrps = 0;
 
     public flywheelsubsystem1() {
         /** configure motors*/
@@ -56,7 +56,7 @@ public class flywheelsubsystem1 extends SubsystemBase{
     
       /** so the target velocity can be updated in the commands */
     public void setvelocity(double targetrps) {
-        targetrps = targetrps;}
+        m_targetrps = targetrps;}
 
     /** checking if the motor is at the desired speed, within tolerance /*/
     
@@ -64,11 +64,14 @@ public class flywheelsubsystem1 extends SubsystemBase{
       return mleadermotor.getVelocity().getValueAsDouble();
     }
 
+    public TalonFX getleader() {
+      return mleadermotor;}
+
     /** periodic recalculating the target velocity using the bangbang controls*/
     public void periodic() {
       double rps = getrps();
       /** if the current motor speed is not at target rps, then we BANG and go to 12 full speed ahead*/
-            if (targetrps > rps) {
+            if (m_targetrps > rps) {
               mleadermotor.setControl(new VoltageOut(12));}
             /** if below, then go to 0. continuously adjust between 12 and 0 as needed */
               else {
